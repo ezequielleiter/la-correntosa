@@ -19,7 +19,7 @@ services:
   - key: PROJECT
     fromService:
       name: la-correntosa
-      type: ""
+      type: "web"
       property: host
   - key: PORT
     sync: false
