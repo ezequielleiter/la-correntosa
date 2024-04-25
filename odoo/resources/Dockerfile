@@ -10,5 +10,3 @@ COPY ./odoo/resources/requirements.txt /tmp/
 RUN pip install -r /tmp/requirements.txt
 
 USER odoo
-
-CMD ["odoo"]
