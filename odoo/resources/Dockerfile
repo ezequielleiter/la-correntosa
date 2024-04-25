@@ -11,30 +11,7 @@ RUN pip install -r /tmp/requirements.txt
 
 USER odoo
 
-# Copiar archivos de configuración de Odoo
-COPY ./odoo/config/ /etc/odoo/
-COPY ./odoo/addons/ /mnt/extra-addons/
-
-# Exponer el puerto para Odoo
-EXPOSE 8069
-
-# Comando de entrada para iniciar Odoo
-CMD ["odoo"]
-
-# Usar una imagen base de Postgres
-FROM postgres:alpine
-
-# Configurar variables de entorno
-ENV POSTGRES_DB=${DB_POSTGRES:-postgres}
-ENV POSTGRES_PASSWORD=${DB_PASSWORD}
-ENV POSTGRES_USER=${DB_USER:-odoo}
-ENV PGDATA=/var/lib/postgresql/data/pgdata
-
-# Montar volumen para almacenar datos de Postgres
-VOLUME /data/${PROJECT}:/var/lib/postgresql/data/pgdata
-
-# Exponer el puerto para Postgres
-EXPOSE 5432
-
-# Comando de entrada para iniciar Postgres
-CMD ["postgres"]
+ENV DB_HOST="${DB_HOST}" \
+    DB_PORT="${DB_PORT}" \
+    DB_USER="${DB_USER}" \
+    DB_PASSWORD="${DB_PASSWORD}"
